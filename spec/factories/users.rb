@@ -5,8 +5,12 @@ FactoryGirl.define do
       role 'teacher'
     end
     factory :student do
-      sequence(:username){|n| "student#{n}"}
       role 'student'
+      sequence(:username){|n| "student#{n}"}
+
+      factory :student_with_homework do
+        homeworks {[FactoryGirl.create(:homework, title: 'Your Worst Homework', question: 'Who is the best teacher in all the land?')]}
+      end
     end
   end
 end

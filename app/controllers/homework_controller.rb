@@ -8,8 +8,8 @@ class HomeworkController < ApplicationController
     if current_user.teacher?
       @homeworks = Homework.all()
     else
-      @homeworks = nil
+      @homeworks = current_user.homeworks
     end
-    
   end
+
 end
