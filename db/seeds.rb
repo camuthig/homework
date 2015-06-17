@@ -7,3 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 FactoryGirl.create(:teacher, username: 'teacher')
 FactoryGirl.create(:student, username: 'student')
+FactoryGirl.create(:homework, title: 'Your First Homework', question: 'Who is the best teacher in all the land?')
+FactoryGirl.create(:homework, title: 'Much Harder Homework', question: 'What is your favorite color?')

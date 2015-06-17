@@ -1,0 +1,28 @@
+<%= content_tag :div, class: 'page-header' do %>
+  <%= content_tag :h1 do %>
+    Homework
+  <% end %>
+<% end %>
+
+<table class="table">
+  <tr>
+    <th>Title</th>
+    <th>Question</th>
+    <th>Due Date</th>
+    <th></th>
+  </tr>
+  <% if @homeworks %>
+    <% @homeworks.each do |homework| %>
+      <tr>
+        <td><%= homework.title %></td>
+        <td><%= homework.question %></td>
+        <td><%= homework.due_date %></td>
+        <% if current_user.teacher? %>
+          <td><button type="button" class="btn btn-primary">Assign</button></td>
+        <% else %>
+          <td><button type="button" class="btn btn-primary">Start</button></td>
+        <% end %>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
