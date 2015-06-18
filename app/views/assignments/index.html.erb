@@ -25,7 +25,7 @@
         <% end %>
         <% if current_user.student? %>
           <!-- TODO make sure that the link for creating/updating an answer is set -->
-          <td><%= link_to "Answer", "/", class: "btn btn-primary"%></td>
+          <td><%= link_to "Answer", new_assignment_answer_url(@assignment), class: "btn btn-primary"%></td>
         <% else %>
           <td></td>
         <% end %>

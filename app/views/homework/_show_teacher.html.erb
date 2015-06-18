@@ -9,8 +9,12 @@
       <tr>
         <td><%= assignment.user.username %></td>
         <!-- TODO Make sure that the answer exists before putting it here -->
-        <td>Latest answer</td>
-        <td><button type="button" class="btn btn-primary">See Answer History</button></td>
+        <% if assignment.answers.exists? %>
+          <td><%= assignment.answers.last.answer %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <td><%= link_to "See Answer History", assignment_url(assignment), class: "btn btn-primary"%></td>
       </tr>
     <% end %>
   </table>

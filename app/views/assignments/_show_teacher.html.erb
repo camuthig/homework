@@ -1,0 +1,19 @@
+<%= content_tag :h3 do %>
+  Username: <%= @assignment.user.username %>
+<% end %>
+<% if @assignment.answers %>
+  <table class="table">
+    <tr>
+      <th>Answer</th>
+      <th>Date Submitted</th>
+    </tr>
+    <% @assignment.answers.order(created_at: :desc).each do |answer| %>
+      <tr>
+        <td><%= answer.answer %></td>
+        <td><%= answer.created_at %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <h5>No answers have been submitted yet</h5>
+<% end %>

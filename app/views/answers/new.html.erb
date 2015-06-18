@@ -7,12 +7,12 @@
 <%= content_tag :div, class: 'container' do %>
   <%= content_tag :div, class: 'row' do %>
     <%= content_tag :h3 do %>
-      Question: <%= @assignment.homework.question %>
+      <%= @assignment.homework.question %>
     <% end %>
-    <% if current_user.student? %>
-      <%= render "show_student" %>
-    <% else %>
-      <%= render "show_teacher" %>
+    <%= bootstrap_form_for(@answer, :url => assignment_answers_path(@assignment), html: { class: 'form-horizontal' }) do |f| %>
+      <%= f.text_area :answer, :value => @latest_answer.answer %>
+      <%= f.submit "Submit", class: "btn btn-primary" %>
     <% end %>
   <% end %>
 <% end %>
+

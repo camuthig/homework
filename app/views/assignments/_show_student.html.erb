@@ -1,1 +1,6 @@
-<p> I'm a student, so I should see a form to answer the question</p>
+<% if @assignment.answers.exists? %>
+  <h5><%= @assignment.answers.last.answer %></h5>
+<% else %>
+  <h5>Be sure to answer the question before the due date is past!</h5>
+<% end %>
+<td><%= link_to "Answer", new_assignment_answer_url(@assignment), class: "btn btn-primary"%></td>

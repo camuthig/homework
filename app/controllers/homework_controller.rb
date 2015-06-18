@@ -8,7 +8,8 @@ class HomeworkController < ApplicationController
     if current_user.teacher?
       @homeworks = Homework.all()
     else
-      @homeworks = current_user.homeworks
+      redirect_to assignments_url() and return
+      #@homeworks = current_user.homeworks
     end
 
     respond_to do |format|
