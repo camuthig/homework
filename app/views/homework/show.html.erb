@@ -1,0 +1,16 @@
+<%= content_tag :div, class: 'page-header' do %>
+  <%= content_tag :h1 do %>
+    <%= @homework.title %>
+  <% end %>
+<% end %>
+
+<%= content_tag :div, class: 'container' do %>
+  <%= content_tag :div, class: 'row' do %>
+    <%= content_tag :h3 do %>
+      <%= @homework.question %>
+    <% end %>
+    <% if current_user.teacher? %>
+      <%= render "show_teacher" %>
+    <% end %>
+  <% end %>
+<% end %>

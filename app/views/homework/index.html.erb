@@ -18,9 +18,9 @@
         <td><%= homework.question %></td>
         <td><%= homework.due_date %></td>
         <% if current_user.teacher? %>
-          <td><button type="button" class="btn btn-primary">Assign</button></td>
+          <td><%= link_to "Details", homework_path(homework), class: "btn btn-primary"%></td>
         <% else %>
-          <td><button type="button" class="btn btn-primary">Start</button></td>
+          <td><button type="button" class="btn btn-primary">Answer</button></td>
         <% end %>
       </tr>
     <% end %>

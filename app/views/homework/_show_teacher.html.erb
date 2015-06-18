@@ -1,0 +1,19 @@
+<% if @homework.assignments %>
+  <table class="table">
+    <tr>
+      <th>Student</th>
+      <th>Latest Answer</th>
+      <th></th>
+    </tr>
+    <% @homework.assignments.each do |assignment| %>
+      <tr>
+        <td><%= assignment.user.username %></td>
+        <!-- TODO Make sure that the answer exists before putting it here -->
+        <td>Latest answer</td>
+        <td><button type="button" class="btn btn-primary">See Answer History</button></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <h4>Assign this homework to students for them to begin work.</h4>
+<% end %>

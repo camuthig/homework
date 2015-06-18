@@ -10,6 +10,22 @@ class HomeworkController < ApplicationController
     else
       @homeworks = current_user.homeworks
     end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @homeworks }
+    end
+  end
+
+  def show
+    @homework = Homework.find(params[:id])
+    if !@homework
+      raise ActionController::RoutingError.new('Not Found')
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json: @homework }
+    end
   end
 
 end

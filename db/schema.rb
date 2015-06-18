@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150617041832) do
+ActiveRecord::Schema.define(version: 20150617135341) do
+
+  create_table "answers", force: :cascade do |t|
+    t.string   "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "assignments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "homework_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "assignments", ["homework_id"], name: "index_assignments_on_homework_id"
+  add_index "assignments", ["user_id"], name: "index_assignments_on_user_id"
 
   create_table "homeworks", force: :cascade do |t|
     t.string   "title"
@@ -20,16 +36,6 @@ ActiveRecord::Schema.define(version: 20150617041832) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "homeworks_users", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "homework_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "homeworks_users", ["homework_id"], name: "index_homeworks_users_on_homework_id"
-  add_index "homeworks_users", ["user_id"], name: "index_homeworks_users_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "username",   null: false

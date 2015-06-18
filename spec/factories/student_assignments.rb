@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :student_assignment do
+  factory :assignment do
     homework
     user
   end

@@ -11,7 +11,17 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create', as: 'session'
   match 'logout', to: 'sessions#destroy', as: 'logout', via: [:get, :delete]
 
-  resources :homework, only: [:index]
+  resources :homework, only: [:index, :show]
+
+  resources :assignments do
+    resources :answers
+  end
+
+  # /homework all
+  # /homework one
+  # /homework/assignment/:id put
+  # /homework/assignment/:id get (handle for student and teacher)
+  # /homework/assignment/:id/student/:id get
 
 
   # Example of regular route:

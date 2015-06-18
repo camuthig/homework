@@ -1,6 +1,6 @@
-class CreateHomeworksUsers < ActiveRecord::Migration
+class CreateAssignments < ActiveRecord::Migration
   def change
-    create_table :homeworks_users do |t|
+    create_table :assignments do |t|
       t.belongs_to :user, index: true
       t.belongs_to :homework, index: true
       t.timestamps null: false

@@ -3,5 +3,6 @@ class Homework < ActiveRecord::Base
   validates :question, presence: true
   validates :due_date, presence: true
 
-  has_and_belongs_to_many :users
+  has_many :assignments
+  has_many :users, :through => :assignments
 end
