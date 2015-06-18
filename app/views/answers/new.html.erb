@@ -10,7 +10,7 @@
       <%= @assignment.homework.question %>
     <% end %>
     <%= bootstrap_form_for(@answer, :url => assignment_answers_path(@assignment), html: { class: 'form-horizontal' }) do |f| %>
-      <%= f.text_area :answer, :value => @latest_answer.answer %>
+        <%= f.text_area :answer, :value => (@latest_answer ? @latest_answer.answer : '') %>
       <%= f.submit "Submit", class: "btn btn-primary" %>
     <% end %>
   <% end %>

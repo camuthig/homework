@@ -1,20 +1,19 @@
 <% if @homework.assignments.exists? %>
-  <table class="table">
+  <table class="table text-center">
     <tr>
-      <th>Student</th>
-      <th>Latest Answer</th>
+      <th class="text-center">Student</th>
+      <th class="text-center">Latest Answer</th>
       <th></th>
     </tr>
     <% @homework.assignments.each do |assignment| %>
       <tr>
         <td><%= assignment.user.username %></td>
-        <!-- TODO Make sure that the answer exists before putting it here -->
         <% if assignment.answers.exists? %>
           <td><%= assignment.answers.last.answer %></td>
         <% else %>
           <td></td>
         <% end %>
-        <td><%= link_to "See Answer History", assignment_url(assignment), class: "btn btn-primary"%></td>
+        <td class="text-center"><%= link_to "See Answer History", assignment_url(assignment), class: "btn btn-primary"%></td>
       </tr>
     <% end %>
   </table>

@@ -20,8 +20,7 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:id])
     if current_user.student? and @assignment[:user_id] != session[:user_id]
       # A student can only interact with their own assignments
-      # TODO make this a "not allowed" type error
-      raise ActionController::RoutingError.new('Not Found')
+      respond_forbidden("You are not allowed to view the assignment.") and return
     end
     respond_to do |format|
       format.html

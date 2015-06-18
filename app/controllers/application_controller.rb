@@ -6,6 +6,15 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def respond_forbidden(alert)
+    flash[:error] = alert
+    respond_to do |format|
+      format.html { redirect_to root_url }
+      format.xml { head :forbidden }
+      format.json { head :forbidden }
+    end
+  end
+
   # Private: Ensures User is logged in.
   def authorize
     if not current_user

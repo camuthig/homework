@@ -6,9 +6,9 @@
 
 <table class="table">
   <tr>
-    <th>Title</th>
-    <th>Question</th>
-    <th>Due Date</th>
+    <th class="text-center">Title</th>
+    <th class="text-center">Question</th>
+    <th class="text-center">Due Date</th>
     <th></th>
   </tr>
   <% if @homeworks %>
@@ -16,11 +16,11 @@
       <tr>
         <td><%= homework.title %></td>
         <td><%= homework.question %></td>
-        <td><%= homework.due_date %></td>
+        <td class="text-center"><%= homework.due_date.strftime("%Y %m %d at %l:%M %p %Z") %></td>
         <% if current_user.teacher? %>
-          <td><%= link_to "Details", homework_path(homework), class: "btn btn-primary"%></td>
+          <td class="text-center"><%= link_to "Details", homework_path(homework), class: "btn btn-primary"%></td>
         <% else %>
-          <td><button type="button" class="btn btn-primary">Answer</button></td>
+          <td class="text-center"><button type="button" class="btn btn-primary">Answer</button></td>
         <% end %>
       </tr>
     <% end %>

@@ -13,8 +13,10 @@ Rails.application.routes.draw do
 
   resources :homework, only: [:index, :show]
 
-  resources :assignments do
-    resources :answers
+  # Limiting the number of available routes for now
+  # based on the functionality offered by the product
+  resources :assignments, only: [:index, :show] do
+    resources :answers, only: [:new, :index, :show, :create]
   end
 
   # /homework all
