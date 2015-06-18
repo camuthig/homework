@@ -15,9 +15,12 @@ ActiveRecord::Schema.define(version: 20150617135341) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answer"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "assignment_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
+
+  add_index "answers", ["assignment_id"], name: "index_answers_on_assignment_id"
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id"
