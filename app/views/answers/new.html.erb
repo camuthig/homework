@@ -9,9 +9,13 @@
     <%= content_tag :h3 do %>
       <%= @assignment.homework.question %>
     <% end %>
-    <%= bootstrap_form_for(@answer, :url => assignment_answers_path(@assignment), html: { class: 'form-horizontal' }) do |f| %>
-        <%= f.text_area :answer, :value => (@latest_answer ? @latest_answer.answer : '') %>
-      <%= f.submit "Submit", class: "btn btn-primary" %>
+  <% end %>
+  <%= content_tag :div, class: 'row' do %>
+    <%= content_tag :div, class: 'col-md-offset-1 col-md-6' do %>
+      <%= bootstrap_form_for(@answer, :url => assignment_answers_path(@assignment), html: { class: 'form-horizontal' }) do |f| %>
+          <%= f.text_area :answer, :value => (@latest_answer ? @latest_answer.answer : '') %>
+        <%= f.submit "Submit", class: "btn btn-primary" %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
