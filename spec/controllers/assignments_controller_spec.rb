@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe AssignmentsController, type: :controller do
   let(:student) {FactoryGirl.create(:student_with_homework, username: 'lousy_student')}
   let(:other_student) {FactoryGirl.create(:student_with_homework, username: 'other_student')}
-  let(:teacher) {FactoryGirl.create(:student_with_homework, username: 'teacher')}
+  let(:teacher) {FactoryGirl.create(:teacher, username: 'teacher')}
   let(:homework) {FactoryGirl.create(:homework, title: 'Much Harder Homework', question: 'What is your favorite color?')}
   let(:assignment) {FactoryGirl.create(:assignment, user: student, homework: homework)}
   let(:other_assignment) {FactoryGirl.create(:assignment, user: other_student, homework: homework)}
@@ -39,25 +39,27 @@ RSpec.describe AssignmentsController, type: :controller do
   ########################
   # INDEX
   ########################
+  describe 'GET index as student' do
+    it 'renders template' do
+      get :index, {}, {'user_id' => student.id}
+      expect(response).to render_template('index')
+      expect(assigns(:assignments)).to eq Assignment.where(user: student).all
+    end
+  end
 
-  # TODO: write tests for the assignments#index
-  #   success for student (only student's assignments assigned)
-  #   success for teacher (all assignments assigned)
-  #   without session
-  #   other student's assignment
+  describe 'GET index as teacher' do
+    it 'renders template' do
+      get :index, {}, {'user_id' => teacher.id}
+      expect(response).to render_template('index')
+      expect(assigns(:assignments)).to eq Assignment.all
+    end
+  end
 
-  # describe 'GET index student' do
-  #   it 'renders template' do
-  #     get :index, {}, {'user_id' => teacher.id}
-  #     expect(response).to render_template('index')
-  #     expect(assigns(:assignments)).to match_array([other_assignment, assignment])
-  #   end
-  # end
+  describe 'GET index without session' do
+    it 'redirects to login' do
+      get :index, {}
+      expect(response).to redirect_to login_url
+    end
+  end
 
-
-  # TODO: write tests for the assignments@show
-  #   success for student
-  #   success for teacher
-  #   without session
-  #   other student's assignment
 end

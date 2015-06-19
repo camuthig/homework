@@ -9,7 +9,6 @@ class HomeworkController < ApplicationController
       @homeworks = Homework.all()
     else
       redirect_to assignments_url() and return
-      #@homeworks = current_user.homeworks
     end
 
     respond_to do |format|
@@ -19,7 +18,10 @@ class HomeworkController < ApplicationController
   end
 
   def show
-    # TODO: redirect students to the root url
+    if current_user.student?
+      respond_forbidden("Whoops! You were not allowed there.") and return
+    end
+
     @homework = Homework.find(params[:id])
     if !@homework
       raise ActionController::RoutingError.new('Not Found')
