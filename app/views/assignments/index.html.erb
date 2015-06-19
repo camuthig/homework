@@ -6,7 +6,9 @@
 
 <table class="table">
   <tr>
-    <!-- TODO: Handle this for teachers - they should see username along with this data -->
+    <% if current_user.teacher? %>
+      <th class="text-center">Student</th>
+    <% end %>
     <th class="text-center">Title</th>
     <th class="text-center">Question</th>
     <th class="text-center">Due Date</th>
@@ -16,6 +18,9 @@
   <% if @assignments %>
     <% @assignments.each do |assignment| %>
       <tr>
+        <% if current_user.teacher? %>
+          <td><%= assignment.user.username %></td>
+        <% end %>
         <td><%= assignment.homework.title %></td>
         <td><%= assignment.homework.question %></td>
         <td><%= assignment.homework.due_date %></td>
