@@ -4,6 +4,11 @@ class AssignmentsController < ApplicationController
   protect_from_forgery with: :exception
   before_action :authorize
 
+  # Get a list of all assignments. For a student, only their assignments will
+  # appear. Teachers will see all assignments.
+  #
+  # *Assigns* :
+  #   - assignments : The list of assignments
   def index
     if current_user.student?
       @assignments = Assignment.where(user_id: session[:user_id]).all()
@@ -16,6 +21,11 @@ class AssignmentsController < ApplicationController
     end
   end
 
+  # Get a single assignment. For a student, they will get a forbidden error if
+  # they are not the owners of the assignment.
+  #
+  # *Assigns* :
+  #   - assignment : The assignment
   def show
     @assignment = Assignment.find(params[:id])
     if current_user.student? and @assignment[:user_id] != session[:user_id]

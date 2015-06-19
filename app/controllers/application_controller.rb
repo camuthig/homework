@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  # Private: Common ability to handle 403 errors
   def respond_forbidden(alert)
     flash[:error] = alert
     respond_to do |format|

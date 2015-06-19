@@ -4,6 +4,9 @@ class RoutesController < ApplicationController
   protect_from_forgery with: :exception
   before_action :authorize
 
+  # Handle redirection for root. Students should redirect to assignments
+  # while teachers will go to homeworks. This is explicit, rather than relying on
+  # the redirect in homeworks index to avoid confusion and add flexibility.
   def root
     if current_user.student?
       redirect_to assignments_url

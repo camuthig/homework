@@ -6,6 +6,11 @@ class AnswersController < ApplicationController
   # * Make sure that the due date for the homework is not passed
   # * Create a new Answer instance to populate
   # * Get the latest Answer for this assignment to prepopulate the answer with
+  #
+  # *Assigns* :
+  #   - answer : A new Answer object to be filled in the form
+  #   - latest_answer : The latest answer object for this assignment. May be nil
+  #   - assignment : The assignment being answered
   def new
     if !is_valid
       return
@@ -19,6 +24,10 @@ class AnswersController < ApplicationController
   # * Make sure that the user is the one who owns the assignment
   # * Make sure that the due date for the homework is not passed
   # * Save the answer, linking it to the URL assignment_id
+  #
+  # *Assigns* :
+  #   - answer : The latest answer object for this assignment on success
+  #   - assignment : The assignment being answered
   def create
     if !is_valid
       return
@@ -36,7 +45,8 @@ class AnswersController < ApplicationController
 
 
   private
-    # Ensure that the user owns the assignment, and the assignment is not past due
+    # Ensure that the user owns the assignment, and the assignment is not past due. Expects assignment to
+    # already be assigned as an instance variable.
     # * *Returns* :
     #   - Boolean : True when the session's user owns the assignment and the assignment is not past due
     def is_valid
@@ -54,6 +64,8 @@ class AnswersController < ApplicationController
     # over the assignment. This will also create an instance variable *assignment*.
     # * *Returns* :
     #   - Boolean : true when the session's user owns the assignment
+    # * *Assigns* :
+    #   - assignment: The assignment being answered
     def owns_assignment
       @assignment = Assignment.find(params[:assignment_id])
       if @assignment.user_id != session[:user_id]
