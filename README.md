@@ -13,7 +13,7 @@ bundle install
 rake db:reset
 ```
 
-This will set up the database and it also create 2 users: 'teacher' and 'student'.
+This will set up the database and it also create 3 users: 'teacher', 'student' and 'lazy_student'.
 
 To start the web server, run
 
@@ -23,6 +23,16 @@ bundle exec rails server
 
 Open your web browser and go to http://localhost:3000
 
-You can log in as a teacher by using 'teacher' as the username and log in as a student by using 'student' as the username.
+There are three available users in the system:
 
-Good Luck!
+1. teacher
+2. student - A student who is on top of their homework.
+3. lazy_student - A student who hasn't started their homework yet.
+
+# Run the Tests
+
+Unit tests have been added for the controller logic. You can run these tests with:
+
+```console```
+rspec
+```
