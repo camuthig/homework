@@ -19,6 +19,7 @@ class HomeworkController < ApplicationController
   end
 
   def show
+    # TODO: redirect students to the root url
     @homework = Homework.find(params[:id])
     if !@homework
       raise ActionController::RoutingError.new('Not Found')

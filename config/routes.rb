@@ -19,12 +19,6 @@ Rails.application.routes.draw do
     resources :answers, only: [:new, :index, :show, :create]
   end
 
-  # /homework all
-  # /homework one
-  # /homework/assignment/:id put
-  # /homework/assignment/:id get (handle for student and teacher)
-  # /homework/assignment/:id/student/:id get
-
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
