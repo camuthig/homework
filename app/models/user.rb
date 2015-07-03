@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
 
   has_many :assignments
   has_many :homeworks, :through => :assignments
+  has_many :refresh_tokens
 end

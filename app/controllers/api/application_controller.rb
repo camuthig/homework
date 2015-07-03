@@ -14,6 +14,7 @@ class Api::ApplicationController < ActionController::Base
   end
 
   def set_current_user
+    # TODO: Make sure the token is not in the invalid cache
     if request.headers['Authorization']
       body = JsonWebToken.decode(request.headers['Authorization'])
       if body
@@ -39,6 +40,10 @@ class Api::ApplicationController < ActionController::Base
 
   def respond_unauthorized(message)
     respond_error('unauthorized', message, :unauthorized)
+  end
+
+  def respond_unauthorized(message)
+    respond_error('not_found', message, :not_found)
   end
 
 end

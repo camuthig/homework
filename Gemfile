@@ -26,6 +26,8 @@ gem 'bootstrap_form'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # Include jwt capabilities for the API
 gem 'jwt'
+# Include Rails 5 secure token capabilities
+gem 'has_secure_token'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

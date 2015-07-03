@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150617135341) do
+ActiveRecord::Schema.define(version: 20150703165002) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "answer"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20150617135341) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "refresh_tokens", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.string   "token",      null: false
+  end
+
+  add_index "refresh_tokens", ["user_id"], name: "index_refresh_tokens_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "username",   null: false

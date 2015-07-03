@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   namespace :api do
     # Login/Logout API support
     post 'login', to: 'authentication#create'
+    post 'refresh', to: 'authentication#refresh'
     match 'logout', to: 'authentication#destroy', via: [:get, :delete]
 
     resources :homework
