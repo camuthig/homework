@@ -18,6 +18,14 @@ Rails.application.routes.draw do
     resources :answers, only: [:new, :index, :show, :create]
   end
 
+  namespace :api do
+    # Login/Logout API support
+    post 'login', to: 'authentication#create'
+    match 'logout', to: 'authentication#destroy', via: [:get, :delete]
+
+    resources :homework
+  end
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
