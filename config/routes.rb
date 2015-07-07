@@ -24,7 +24,11 @@ Rails.application.routes.draw do
     post 'refresh', to: 'authentication#refresh'
     match 'logout', to: 'authentication#destroy', via: [:get, :delete]
 
-    resources :homework
+    resources :homework do
+      get 'assignments', to: 'homework#assignments'
+    end
+
+    resources :assignment
   end
 
 
