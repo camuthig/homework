@@ -13,9 +13,9 @@ class JsonWebToken
       end
       body = JWT.decode(pieces[1], Rails.application.secrets.secret_key_base)[0]
       HashWithIndifferentAccess.new body
-    #rescue
+    rescue
       # we don't need to throw errors, just return nil if JWT is invalid or expired
-      #nil
+      nil
     end
   end
 end
