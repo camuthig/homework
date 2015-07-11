@@ -42,7 +42,7 @@ class Api::ApplicationController < ActionController::Base
     respond_error('unauthorized', message, :unauthorized)
   end
 
-  def respond_unauthorized(message)
+  def respond_not_found(message)
     respond_error('not_found', message, :not_found)
   end
 
