@@ -7,6 +7,12 @@ class Api::ApplicationController < ActionController::Base
 
   protected
 
+  def student_not_allowed
+    if @current_user.student?
+      respond_forbidden("Whoops! You were not allowed there.")
+    end
+  end
+
   def authenticate_request
     if not set_current_user
       respond_unauthorized('Invalid or expired token')
@@ -25,6 +31,9 @@ class Api::ApplicationController < ActionController::Base
     end
   end
 
+  ##########################################
+  # Error Renderers
+  ##########################################
   def respond_error(code, message, status)
     render json: {errorCode: code, errorMessage: message}, :status => status
   end
@@ -46,4 +55,14 @@ class Api::ApplicationController < ActionController::Base
     respond_error('not_found', message, :not_found)
   end
 
+  ##########################################
+  # Success Renderers
+  ##########################################
+  def render_created()
+    render :status => 201
+  end
+
+  def render_no_content()
+    render :nothing => true, :status => 204
+  end
 end

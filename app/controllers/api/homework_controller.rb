@@ -1,19 +1,11 @@
 class Api::HomeworkController < Api::ApplicationController
-  before_action :set_current_user
+  before_action :set_current_user, :student_not_allowed
 
   def index
-    if @current_user.student?
-      respond_forbidden('Students are not allowed to view homework') and return
-    end
-
     @homeworks = Homework.all()
   end
 
   def show
-    if @current_user.student?
-      respond_forbidden("Whoops! You were not allowed there.") and return
-    end
-
     @homework = Homework.find(params[:id])
     if !@homework
       raise ActionController::RoutingError.new('Not Found')
@@ -21,14 +13,44 @@ class Api::HomeworkController < Api::ApplicationController
     end
   end
 
-  def assignments
-    if @current_user.student?
-      respond_forbidden("Whoops! You were not allowed there.") and return
+  def create
+    @homework = Homework.create(homework_params)
+    if !@homework.valid?
+      respond_bad_request('Invalid parameters for creating homework') and return
     end
+    if !@homework.save
+      respond_internal()
+    end
+    render_created
+  end
 
-    @homework = Homework.find(params[:homework_id])
+  def update
+    @homework = Homework.find(params[:id])
+    @homework.update(homework_params)
+    if !@homework.valid?
+      respond_bad_request('Invalid parameters for creating homework') and return
+    end
+    if !@homework.save
+      respond_internal()
+    end
+  end
+
+  def homework_params
+    params.permit(:question, :title, :due_date)
+  end
+
+  def destroy
+    Homework.find(params[:id]).destroy
+    render_no_content
+  end
+
+  def assignments
+    @homework = Homework.includes(assignments: [:user, :answers]).find(params[:homework_id])
     if !@homework
       return respond_not_found('Homework was not found.')
     end
   end
+
+  protected
+
 end
