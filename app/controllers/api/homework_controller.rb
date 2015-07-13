@@ -44,6 +44,16 @@ class Api::HomeworkController < Api::ApplicationController
     render_no_content
   end
 
+  def assign
+    @homework = Homework.find(params[:homework_id])
+    creates = []
+    params[:users].each do |user|
+      creates << {homework_id: @homework.id, user_id: user}
+    end
+    Assignment.create(creates)
+    @homework = Homework.includes(assignments: [:user, :answers]).find(params[:homework_id])
+  end
+
   def assignments
     @homework = Homework.includes(assignments: [:user, :answers]).find(params[:homework_id])
     if !@homework

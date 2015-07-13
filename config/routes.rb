@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
     resources :homework do
       get 'assignments', to: 'homework#assignments'
+      post 'assign', to: 'homework#assign'
     end
 
     resources :assignment
