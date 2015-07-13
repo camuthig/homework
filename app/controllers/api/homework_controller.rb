@@ -50,7 +50,9 @@ class Api::HomeworkController < Api::ApplicationController
     params[:users].each do |user|
       creates << {homework_id: @homework.id, user_id: user}
     end
-    Assignment.create(creates)
+    Assignment.transaction do
+      Assignment.create!(creates)
+    end
     @homework = Homework.includes(assignments: [:user, :answers]).find(params[:homework_id])
   end
 

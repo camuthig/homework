@@ -18,7 +18,8 @@ Rails.application.routes.draw do
     resources :answers, only: [:new, :index, :show, :create]
   end
 
-  namespace :api do
+  namespace :api, format: false do
+
     # Login/Logout API support
     post 'login', to: 'authentication#create'
     post 'refresh', to: 'authentication#refresh'
