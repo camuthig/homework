@@ -1,4 +1,4 @@
-# Edmodo Interview Homework
+# Homework
 
 This repository contains a bare-bone application including basic authentication.
 
